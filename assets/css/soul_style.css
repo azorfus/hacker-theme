@@ -1,41 +1,37 @@
 /* ================================
-   Global PeachPuff Theme for Jekyll
+   Global Skyburn-Inspired Theme
    ================================ */
 
-@font-face {
-  font-family: "FixedSysCustom";
-  src: url("/assets/fonts/fixedsys.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  /* Background */
-  --bg: #ffdab9;       /* PeachPuff */
-  --surface: #ffe4c4;  /* lighter surface for code blocks */
+  /* Background and surfaces */
+  --bg: #F8F8FF;        /* Cloud White */
+  --surface: #E0F7FF;   /* Light surface for code blocks */
 
   /* Site text */
-  --text: #000000;      /* black text */
-  --link: #406090;      /* Vim Comment color for hyperlinks */
-  --link-hover: #d2691e; /* optional hover accent */
+  --text: #708090;       /* Slate Gray for main text */
+  --link: #87CEEB;       /* Sky Blue for hyperlinks */
+  --link-hover: #FF4500; /* Sunset Orange hover */
 
-  /* Code syntax colors */
-  --comment: #406090;
-  --constant: #c00058;
-  --special: SlateBlue;
-  --identifier: DarkCyan;
-  --statement: Brown;
-  --preproc: Magenta3;
-  --type: SeaGreen;
-  --error: White;
-  --todo-bg: Yellow;
-  --todo-fg: Blue;
+  /* Code syntax highlighting */
+  --comment: #406090;    /* Darker blue for comments */
+  --constant: #FFB6C1;   /* Dawn Pink */
+  --special: #FF4500;    /* Sunset Orange */
+  --identifier: #1E90FF; /* Dodger Blue / functions */
+  --statement: #228B22;  /* Green for statements */
+  --preproc: #DA70D6;    /* Orchid-like for tags/attributes */
+  --type: #2E8B57;       /* Sea Green / types */
+  --error: #FF6347;      /* Tomato / errors */
+  --todo-bg: #FFFF00;    /* Yellow background for TODO */
+  --todo-fg: #0000FF;    /* Blue text for TODO */
 
   --radius: 6px;
   --line: rgba(0,0,0,0.1);
 
   /* Fonts */
-  --mono: "FixedSysCustom", monospace;
+  --mono: 'Inter', monospace;
 }
 
 /* ===== Base site styles ===== */
@@ -49,7 +45,7 @@ html, body {
 }
 
 .container {
-  max-width: calc(100% - 100px);
+  width: calc(100% - 100px); /* 50px padding on each side */
   margin: 0 auto;
   padding: 0;
 }
@@ -71,12 +67,20 @@ a:hover {
   text-decoration: underline;
 }
 
+header, footer {
+  font-weight: normal;
+  color: var(--text);
+  background-color: var(--surface);
+  padding: 1rem 0;
+  text-align: center;
+}
+
 /* ================================
    Rouge Code Highlighting
    ================================ */
 
-pre, code { 
-  font-family: var(--mono); 
+pre, code {
+  font-family: var(--mono);
   font-weight: normal;
 }
 
@@ -90,14 +94,17 @@ pre {
 }
 
 :not(pre) > code {
-  background: rgba(255,218,185,0.6);
+  background: rgba(224, 247, 255, 0.6); /* Slightly tinted */
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.95em;
 }
 
-/* Rouge wrapper */
-.highlight { background: var(--surface); color: var(--text); }
+/* Wrapper */
+.highlight {
+  background: var(--surface);
+  color: var(--text);
+}
 
 /* Code syntax highlighting */
 .highlight .c  { color: var(--comment); font-style: italic; } /* Comment */
@@ -106,6 +113,6 @@ pre {
 .highlight .nf { color: var(--identifier); }                   /* Function/Identifier */
 .highlight .s  { color: var(--special); }                      /* String */
 .highlight .na, .highlight .nt { color: var(--preproc); }     /* Tag/Attr */
-.highlight .err { color: var(--error); background: red; }     /* Error */
+.highlight .err { color: var(--error); background: #FFE4E1; } /* Error */
 .highlight .todo { color: var(--todo-fg); background: var(--todo-bg); } /* Todo */
 .highlight .o, .highlight .p { color: var(--text); }          /* Operator/Punctuation */
