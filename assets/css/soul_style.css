@@ -43,14 +43,15 @@ html, body {
   font-family: var(--mono);
   line-height: 1.6;
   margin: 0;
-  padding: 2cm; /* ~a few centimeters padding from edge */
+  padding: 0;  /* removed extra padding */
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0; /* container uses full page padding from body */
+  padding: 0;  /* no extra padding inside container */
 }
+
 
 h1, h2, h3, h4 {
   font-weight: 700;
