@@ -1,5 +1,5 @@
 /* ================================
-   Global PeachPuff Theme
+   Global PeachPuff Theme for Jekyll
    ================================ */
 
 @font-face {
@@ -10,26 +10,27 @@
 }
 
 :root {
-  /* Backgrounds */
-  --bg: #ffdab9;        /* PeachPuff */
-  --surface: #ffe4c4;   /* Bisque / lighter surface */
+  /* Background */
+  --bg: #ffdab9;       /* PeachPuff */
+  --surface: #ffe4c4;  /* lighter surface for code blocks */
 
-  /* Text */
-  --text: #000000;      /* black text for site */
-  --muted: #a67c52;     /* muted comments for code */
+  /* Site text */
+  --text: #000000;      /* black text */
+  --link: #406090;      /* Vim Comment color for hyperlinks */
+  --link-hover: #d2691e; /* optional hover accent */
 
-  /* Code accents */
-  --accent-1: #d2691e;  /* keywords */
-  --accent-2: #1e90ff;  /* functions, links */
-  --accent-3: #228b22;  /* strings */
-  --accent-4: #b03060;  /* numbers */
-  --accent-5: #cd853f;  /* tags/attributes */
+  /* Code syntax colors */
+  --comment: #406090;
+  --constant: #c00058;
+  --special: SlateBlue;
+  --identifier: DarkCyan;
+  --statement: Brown;
+  --preproc: Magenta3;
+  --type: SeaGreen;
+  --error: White;
+  --todo-bg: Yellow;
+  --todo-fg: Blue;
 
-  /* Links */
-  --link: #1e90ff;
-  --link-hover: #d2691e;
-
-  /* Misc */
   --radius: 6px;
   --line: rgba(0,0,0,0.1);
 
@@ -48,13 +49,13 @@ html, body {
 }
 
 .container {
-  max-width: 1080px; 
+  max-width: calc(100% - 100px);
   margin: 0 auto;
   padding: 0;
 }
 
 h1, h2, h3, h4 {
-  font-weight: normal;   /* no bold */
+  font-weight: normal;
   color: var(--text);
   margin-top: 1.2em;
   margin-bottom: 0.6em;
@@ -68,11 +69,6 @@ a {
 a:hover {
   color: var(--link-hover);
   text-decoration: underline;
-}
-
-header, footer {
-  font-weight: normal;
-  color: var(--text);
 }
 
 /* ================================
@@ -100,14 +96,16 @@ pre {
   font-size: 0.95em;
 }
 
-/* Wrapper */
+/* Rouge wrapper */
 .highlight { background: var(--surface); color: var(--text); }
 
-/* Rouge token classes (code only) */
-.highlight .c { color: var(--muted); font-style: italic; }   /* comment */
-.highlight .k { color: var(--accent-1); }                   /* keyword */
-.highlight .nf { color: var(--accent-2); }                  /* function */
-.highlight .s { color: var(--accent-3); }                   /* string */
-.highlight .m { color: var(--accent-4); }                   /* number */
-.highlight .na, .highlight .nt { color: var(--accent-5); } /* attr/tag */
-.highlight .p, .highlight .o { color: var(--text); }        /* punctuation/operator */
+/* Code syntax highlighting */
+.highlight .c  { color: var(--comment); font-style: italic; } /* Comment */
+.highlight .m  { color: var(--constant); }                     /* Number */
+.highlight .k  { color: var(--statement); }                    /* Keyword */
+.highlight .nf { color: var(--identifier); }                   /* Function/Identifier */
+.highlight .s  { color: var(--special); }                      /* String */
+.highlight .na, .highlight .nt { color: var(--preproc); }     /* Tag/Attr */
+.highlight .err { color: var(--error); background: red; }     /* Error */
+.highlight .todo { color: var(--todo-fg); background: var(--todo-bg); } /* Todo */
+.highlight .o, .highlight .p { color: var(--text); }          /* Operator/Punctuation */
