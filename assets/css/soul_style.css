@@ -1,43 +1,55 @@
 /* ================================
-   Global PeachPuff Theme
+   Global PeachPuff Vim-inspired Theme
    ================================ */
 
+@font-face {
+  font-family: "FixedSysCustom";
+  src: url("/assets/fonts/fixedsys.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --bg: #fff5ec;
-  --surface: #fffaf7;
-  --text: #3a2b24;
-  --muted: #8b6f60;
+  /* Backgrounds */
+  --bg: #ffefd5;        /* PeachPuff */
+  --surface: #ffe4c4;   /* Bisque / lighter surface */
+  --text: #4b2e2e;      /* Darker brown for readability */
+  --muted: #a67c52;     /* muted comments or secondary text */
 
-  --accent-1: #b44a37; /* keywords, headings */
-  --accent-2: #2b6f92; /* functions, links */
-  --accent-3: #2e8b4a; /* strings, success */
-  --accent-4: #aa6fb2; /* numbers, constants */
-  --accent-5: #d08b00; /* tags, attrs */
+  /* Accents */
+  --accent-1: #d2691e;  /* keywords, headings (chocolate/burnt orange) */
+  --accent-2: #1e90ff;  /* functions, links (dodger blue) */
+  --accent-3: #228b22;  /* strings, success (forest green) */
+  --accent-4: #b03060;  /* numbers, constants (maroon) */
+  --accent-5: #cd853f;  /* tags, attrs (peru) */
 
-  --link: #2b6f92;
-  --link-hover: #b44a37;
+  /* Links */
+  --link: #1e90ff;
+  --link-hover: #d2691e;
 
-  --radius: 8px;
-  --line: rgba(58,43,36,0.1);
+  /* Misc */
+  --radius: 6px;
+  --line: rgba(75,46,46,0.2);
 
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Fonts */
+  --mono: "FixedSysCustom", monospace;
+  --sans: "FixedSysCustom", monospace;
 }
 
 /* ===== Base site styles ===== */
 html, body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--sans);
+  font-family: var(--mono);
   line-height: 1.6;
   margin: 0;
-  padding: 0;
+  padding: 2cm; /* ~a few centimeters padding from edge */
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 0; /* container uses full page padding from body */
 }
 
 h1, h2, h3, h4 {
@@ -88,7 +100,7 @@ pre, code { font-family: var(--mono); }
 pre {
   background: var(--surface);
   border: 1px solid var(--line);
-  padding: 14px 16px;
+  padding: 1.5rem;
   border-radius: var(--radius);
   overflow: auto;
   margin: 1rem 0;
