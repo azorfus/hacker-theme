@@ -1,215 +1,137 @@
-/* peachpuff-syntax.css
-   A standalone CSS theme inspired by Vim's "PeachPuff" colorscheme.
-   Works with plain <pre><code> blocks, highlight.js (.hljs) and Prism (.token) class names.
-   Includes line numbers, selection, and a small copy button style.
-*/
-:root{
-  --bg: #fff5ec;            /* soft warm background */
-  --surface: #fffaf7;       /* slightly lighter surface */
-  --text: #3a2b24;          /* dark warm text */
-  --muted: #8b6f60;         /* comments / muted text */
-  --accent-1: #b44a37;      /* keywords / storage */
-  --accent-2: #2b6f92;      /* functions, builtins */
-  --accent-3: #2e8b4a;      /* strings / success */
-  --accent-4: #aa6fb2;      /* numbers / constants */
-  --accent-5: #d08b00;      /* constants / warnings */
-  --punct: #4a3f38;         /* punctuation */
-  --line: rgba(58,43,36,0.06);
-  --gutter-bg: rgba(250,240,235,0.6);
+/* ================================
+   Global PeachPuff Theme
+   ================================ */
+
+:root {
+  --bg: #fff5ec;
+  --surface: #fffaf7;
+  --text: #3a2b24;
+  --muted: #8b6f60;
+
+  --accent-1: #b44a37; /* keywords, strong links */
+  --accent-2: #2b6f92; /* secondary links */
+  --accent-3: #2e8b4a; /* success, strings */
+  --accent-4: #aa6fb2; /* numbers */
+  --accent-5: #d08b00; /* warning */
+
+  --link: #2b6f92;
+  --link-hover: #b44a37;
+
   --radius: 8px;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Helvetica Neue", monospace;
+  --line: rgba(58,43,36,0.1);
+
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Page-level defaults for code blocks */
+/* ===== Base ===== */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* ===== Headings ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--accent-1);
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; color: var(--accent-2); }
+h3 { font-size: 1.2rem; color: var(--accent-3); }
+
+/* ===== Links ===== */
+a {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ===== Header ===== */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+header h1 {
+  margin: 0;
+}
+header h2 {
+  margin: 0.2rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+#pages {
+  margin-top: 0.8rem;
+}
+#pages .nav-link {
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+/* ===== Lists ===== */
+ul {
+  padding-left: 1.2rem;
+}
+li {
+  margin-bottom: 0.4rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 3rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===== Code Highlighting (Rouge + inline) ===== */
 pre, code {
   font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--text);
 }
-
 pre {
-  background: linear-gradient(180deg, var(--surface), var(--bg));
+  background: var(--surface);
   border: 1px solid var(--line);
   padding: 14px 16px;
   border-radius: var(--radius);
   overflow: auto;
-  box-shadow: 0 6px 18px rgba(46,33,28,0.06);
-  position: relative;
   margin: 1rem 0;
-}
-
-code {
-  background: transparent;
-  padding: 0.1rem 0.25rem;
-  border-radius: 4px;
-}
-
-/* Gutter / line numbers */
-pre.code-with-lines {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
-pre.code-with-lines > .gutter {
-  background: var(--gutter-bg);
-  padding: 12px 10px;
-  text-align: right;
-  user-select: none;
-  border-right: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-pre.code-with-lines > code {
-  padding-left: 16px;
-}
-
-/* Selection inside code */
-pre ::selection, pre code ::selection {
-  background: rgba(180,74,55,0.14);
-}
-
-/* Small copy-to-clipboard button (non-functional styling only) */
-.code-copy-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  background: rgba(58,43,36,0.06);
-  border: 1px solid rgba(58,43,36,0.06);
-  padding: 6px 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-}
-
-/* Generic token mapping for Prism.js (.token) */
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata,
-.token.block-comment,
-.token.line-comment {
-  color: var(--muted);
-  font-style: italic;
-}
-
-.token.keyword,
-.token.selector,
-.token.important,
-.token.regex,
-.token.atrule,
-.token.property {
-  color: var(--accent-1);
-  font-weight: 600;
-}
-
-.token.function,
-.token.class-name,
-.token.builtin,
-.token.variable {
-  color: var(--accent-2);
-}
-
-.token.string,
-.token.char,
-.token.attr-value,
-.token.template-string {
-  color: var(--accent-3);
-}
-
-.token.number,
-.token.boolean,
-.token.constant {
-  color: var(--accent-4);
-}
-
-.token.operator,
-.token.punctuation {
-  color: var(--punct);
-}
-
-.token.attr-name,
-.token.tag,
-.token.property-access {
-  color: var(--accent-5);
-  font-weight: 600;
-}
-
-/* highlight.js compatibility (.hljs) */
-.hljs {
-  background: transparent;
-  color: var(--text);
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: var(--muted);
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal {
-  color: var(--accent-1);
-  font-weight: 600;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-function {
-  color: var(--accent-2);
-}
-
-.hljs-string,
-.hljs-meta-string {
-  color: var(--accent-3);
-}
-
-.hljs-number,
-.hljs-built_in,
-.hljs-bullet {
-  color: var(--accent-4);
-}
-
-.hljs-attribute,
-.hljs-name {
-  color: var(--accent-5);
-  font-weight: 600;
 }
 
 /* Inline code */
 :not(pre) > code {
-  background: linear-gradient(90deg, rgba(255,218,185,0.6), rgba(255,245,238,0.6));
-  padding: 0.12rem 0.4rem;
-  border-radius: 6px;
-  border: 1px solid rgba(74,63,56,0.04);
+  background: rgba(255,218,185,0.6);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.95em;
 }
 
-/* Small utilities */
-.kbd {
-  font-family: var(--mono);
-  background: rgba(58,43,36,0.05);
-  padding: 2px 6px;
-  border-radius: 6px;
-  border: 1px solid rgba(58,43,36,0.04);
-  font-size: 12px;
-}
-
-/* Accessibility: high contrast focus */
-pre:focus-within,
-.code-copy-btn:focus {
-  outline: 3px solid rgba(43,111,146,0.12);
-  outline-offset: 4px;
-}
-
-/* Optional: subtle faded lines between logical blocks (good for long code) */
-pre hr {
-  border: 0;
-  border-top: 1px solid var(--line);
-  margin: 10px 0;
-}
-
-/* End of file */
+/* Rouge tokens */
+.highlight { background: var(--surface); color: var(--text); }
+.highlight .c { color: var(--muted); font-style: italic; } /* comment */
+.highlight .k { color: var(--accent-1); font-weight: 600; } /* keyword */
+.highlight .nf { color: var(--accent-2); } /* function name */
+.highlight .s { color: var(--accent-3); } /* string */
+.highlight .m { color: var(--accent-4); } /* number */
+.highlight .na, .highlight .nt { color: var(--accent-5); font-weight: 600; } /* attr/tag */
+.highlight .p, .highlight .o { color: var(--text); } /* punctuation */
